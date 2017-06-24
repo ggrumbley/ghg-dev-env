@@ -3,18 +3,19 @@
   "version": "1.0.0",
   "description": "ES6 development environment",
   "scripts": {
-    "predev": "node buildScripts/startMessage.js",
+    "predev": "babel-node buildScripts/startMessage.js",
     "start": "npm-run-all --parallel security-check open:src",
-    "open:src": "node buildScripts/srcServer.js",
+    "open:src": "babel-node buildScripts/srcServer.js",
     "security-check": "nsp check",
     "localtunnel": "lt --port 3000 --subdomain gary",
-    "dev": "npm-run-all --parallel open:src localtunnel"
+    "dev": "npm-run-all --parallel security-check open:src localtunnel"
   },
   "repository": "git@github.com:ggrumbley/ghg-dev-env.git",
   "author": "gary <ggrumbley@gmail.com>",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.0",
     "babel-preset-latest": "^6.24.1",
