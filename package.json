@@ -18,7 +18,9 @@
   "repository": "git@github.com:ggrumbley/ghg-dev-env.git",
   "author": "gary <ggrumbley@gmail.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "whatwg-fetch": "^2.0.3"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
