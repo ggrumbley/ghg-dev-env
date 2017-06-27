@@ -1,6 +1,18 @@
 import 'whatwg-fetch';
 
-const baseUrl = window.location.hostname === 'localhost' ? 'http://localhost:3001/' : '/';
+const getBaseUrl = () => {
+  return getQueryStringParameterByName('useMockApi') ? 'http://localhost:3001/' : '/api/';
+}
+
+const getQueryStringParameterByName = (name, url) => {
+  if (!url) url = window.location.href;
+  name = name.replace(/[[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 
 export const getUsers = () => {
   return get('users');
@@ -11,11 +23,11 @@ export const deleteUser = (id) => {
 }
 
 const get = (url) => {
-  return fetch(baseUrl + url).then(onSuccess, onError);
+  return fetch(getBaseUrl() + url).then(onSuccess, onError);
 }
 
 const del = (url) => {
-  const request = new Request(baseUrl + url, {
+  const request = new Request(getBaseUrl() + url, {
     method: 'DELETE'
   });
 
