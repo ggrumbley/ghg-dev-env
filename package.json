@@ -20,7 +20,8 @@
     "clean-dist": "rimraf ./dist && mkdir dist",
     "prebuild": "npm-run-all clean-dist test lint",
     "build": "babel-node buildScripts/build.js",
-    "postbuild": "babel-node buildScripts/distServer.js",
+    "build:serve": "babel-node buildScripts/distServer.js",
+    "predeploy": "npm run build",
     "deploy": "surge ./dist"
   },
   "repository": "git@github.com:ggrumbley/ghg-dev-env.git",
