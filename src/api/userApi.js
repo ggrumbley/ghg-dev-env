@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 
 const getBaseUrl = () => {
-  return getQueryStringParameterByName('useMockApi') ? 'http://localhost:3001/' : '/api/';
+  return getQueryStringParameterByName('useMockApi') ? 'http://localhost:3001/' : 'https://gg-env-api.herokuapp.com/';
 }
 
 const getQueryStringParameterByName = (name, url) => {
