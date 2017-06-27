@@ -4,6 +4,8 @@
   "description": "ES6 development environment",
   "scripts": {
     "predev": "babel-node buildScripts/startMessage.js",
+    "dev": "npm-run-all --parallel security-check open:src lint:watch test:watch start-mockapi",
+    "dev:open": "npm-run-all --parallel security-check open:src localtunnel",
     "start": "npm-run-all --parallel security-check open:src",
     "open:src": "babel-node buildScripts/srcServer.js",
     "security-check": "nsp check",
@@ -12,8 +14,9 @@
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch",
-    "dev": "npm-run-all --parallel security-check open:src lint:watch test:watch",
-    "dev:open": "npm-run-all --parallel security-check open:src localtunnel"
+    "mock-data:seed": "babel-node buildScripts/generateMockData",
+    "prestart-mockapi": "npm run mock-data:seed",
+    "start-mockapi": "json-server --watch src/api/db.json --port 3001"
   },
   "repository": "git@github.com:ggrumbley/ghg-dev-env.git",
   "author": "gary <ggrumbley@gmail.com>",
@@ -40,7 +43,7 @@
     "extract-text-webpack-plugin": "^2.1.2",
     "html-webpack-plugin": "^2.28.0",
     "jsdom": "9.8.0",
-    "json-schema-faker": "^0.5.0-rc6",
+    "json-schema-faker": "0.4.0",
     "json-server": "^0.10.1",
     "localtunnel": "^1.8.3",
     "mocha": "^3.4.2",

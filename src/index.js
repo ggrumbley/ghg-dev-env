@@ -1,5 +1,6 @@
 import './index.css';
-import { getUsers } from './api/userApi';
+import { getUsers, deleteUser } from './api/userApi';
+import { $, $$ } from './utils/bling';
 
 // Populate table of users via API call.
 getUsers().then((result) => {
@@ -17,5 +18,17 @@ getUsers().then((result) => {
     `;
   });
 
-  global.document.getElementById('users').innerHTML = usersBody;
+  $('#users').innerHTML = usersBody;
+
+  const deleteLinks = $$('.deleteUser');
+
+  Array.from(deleteLinks, (link) => {
+    link.onclick = (e) => {
+      const element = e.target;
+      e.preventDefault();
+      deleteUser(element.attributes["data-id"].value);
+      const row = element.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+    };
+  })
 });
